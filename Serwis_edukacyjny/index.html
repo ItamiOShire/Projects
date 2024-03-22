@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Sortowanie</title>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <div>
+      
+        <input id="emailLogin" type="text" placeholder="Podaj email" required>
+        <input id="passwordLogin" type="password" placeholder="Podaj haslo" required>
+        <button id='login' onclick="login()">Zaloguj się</button>
+        <span id="loginResponse"></span>
+     
+    </div>
+    <div>
+      
+        <input id="emailReg" type="text" placeholder="Podaj email" required>
+        <input id="passwordReg" type="password" placeholder="Podaj haslo" required>
+        <button id='register' onclick="register()">Zarejestruj się</button>
+        <span id="registerResponse"></span>
+      
+    </div>
+    <button id="logout" onclick="logout()">Wyloguj</button>
+</header>
+<main>
+  <div id="Fib">
+    <span id="F">S</span>
+    <span id="I">O</span>
+    <span id="B">R</span>
+    <span id="O">T</span>
+    <span id="N">O</span>
+    <span id="A">W</span>
+    <span id="C">A</span>
+    <span id="C2">N</span>
+    <span id="I2">I</span>
+    <span id="I3">E</span>
+  </div>
+  <div id="divOpis">
+    <h3 >Czym jest sortowanie?</h3>
+    <article id="opis">
+      Sortowanie danych jest jednym z podstawowych problemów programowania komputerów,
+      z którym prędzej czy później spotka się każdy programista. Poniżej przedstawiamy
+      tylko nieliczne dziedziny, w których występuje potrzeba sortowania danych:
+      <ul>
+        <li><b>sport</b> - wyniki uzyskane przez poszczególnych zawodników należy ułożyć w określonej kolejności, aby wyłonić zwycięzcę oraz podać lokatę każdego zawodnika.</li>
+        <li><b>bank</b> - spłaty kredytów należy ułożyć w odpowiedniej kolejności, aby wiadomo było kto i kiedy ma płacić odsetki do banku.</li>
+        <li><b>grafika</b> - wiele algorytmów graficznych wymaga porządkowania elementów, np. ścian obiektów ze względu na odległość od obserwatora. Uporządkowanie takie pozwala później określić, które ze ścian są zakrywane przez inne ściany dając w efekcie obraz trójwymiarowy.</li>
+        <li><b>bazy danych</b> - informacja przechowywana w bazie danych może wymagać różnego rodzaju uporządkowania, np. lista książek może być alfabetycznie porządkowana wg autorów lub tytułów, co znacznie ułatwia znalezienie określonej pozycji.</li>
+      </ul>
+      Zwykle sortujemy liczby, lecz wcale nie musi tak być (chociaż tak naprawdę każdy rodzaj danych komputerowych w końcu sprowadza się do liczb, gdyż wewnętrznie jest reprezentowany przez kody binarne).
+    W takim przypadku należy określić dla każdego elementu tzw. klucz (ang. key), wg którego dokonywane jest sortowanie. Ponieważ klucz jest liczbą, zatem obowiązują dla niego podane wyżej zasady kolejności elementów. Na przykład dla tekstów kluczem mogą być kody poszczególnych znaków. 
+    Większość języków programowania posiada operatory porównywania ciągu znaków (problemem może być sortowanie wg zasad języka polskiego - nie wystarczy wtedy porównywać kodów znakowych, ponieważ kody polskich literek ą, ć, Ć itd. są zwykle większe od kodów liter alfabetu łacińskiego, 
+    ale i ten problem daje się z powodzeniem rozwiązać przez odpowiedni dobór kluczy).
+
+Przez sortowanie będziemy rozumieć taką zmianę kolejności elementów zbioru nieuporządkowanego (permutację), aby w wyniku spełniały one założony porządek.
+    </article>
+    <div id="im1"><img src="images/im1.gif"></div>
+    
+  </div>
+
+  <div id="divOpis">
+
+    <h3>Złożoność czasowa</h3>
+    <article id="opis">
+      Kolejnym zagadnieniem, które powinniśmy omówić we wstępie, jest tzw. czasowa złożoność obliczeniowa (ang. computational complexity) algorytmu sortującego (istnieje również złożoność pamięciowa - memory complexity). 
+      Określa ona statystycznie czas wykonywania algorytmu w zależności od liczby danych wejściowych. Czasowa złożoność obliczeniowa wyrażana jest liczbą tzw. operacji dominujących, czyli takich, które mają bezpośredni wpływ na czas wykonywania algorytmu.
+       Dzięki takiemu podejściu uniezależniamy czasową złożoność obliczeniową od szybkości komputera, na którym dany algorytm jest realizowany. Złożoność obliczeniową charakteryzujemy przy pomocy tzw. notacji &#x039F (omikron). Oto odpowiednie przykłady:
+       <div id="przyklady">
+        <ul>
+          <li><b>&#x039F (n)</b>- Algorytm o liniowej zależności czasu wykonania od ilości danych. Dwukrotny wzrost liczby przetwarzanych danych powoduje dwukrotny wzrost czasu wykonania. Tego typu złożoność powstaje, gdy dla każdego elementu należy wykonać stałą liczbę operacji.</li>
+          <li><b>&#x039F (n<sup>2</sup>)</b>- Algorytm, w którym czas wykonania rośnie z kwadratem liczby przetwarzanych elementów. Dwukrotny wzrost liczby danych powoduje czterokrotny wzrost czasu wykonania. Tego typu złożoność powstaje, gdy dla każdego elementu należy wykonać ilość operacji proporcjonalną do liczby wszystkich elementów.</li>
+          <li><b>&#x039F (n log n)</b>- Dobre algorytmy sortujące mają taką właśnie złożoność obliczeniową. Czas wykonania przyrasta dużo wolniej od wzrostu kwadratowego. Tego typu złożoność powstaje, gdy zadanie dla n elementów można rozłożyć na dwa zadania zawierające po połowie elementów.</li>
+          <li><b>&#x039F (n!) oraz &#x039F (a<sup>n</sup>)</b>- Bardzo pesymistyczne algorytmy, czas wykonania rośnie szybko ze wzrostem liczby elementów wejściowych, czyli znalezienie rozwiązania może zająć najszybszym komputerom całe wieki lub tysiąclecia. Takich algorytmów należy unikać jak ognia !</li>
+        </ul>
+       </div>
+       Zapis &#x039F ( ) określamy mianem klasy złożoności obliczeniowej algorytmu. 
+       Klasa czasowej złożoności obliczeniowej umożliwia porównywanie wydajności różnych algorytmów sortujących. 
+       Z reguły proste algorytmy posiadają wysoką złożoność obliczeniową - długo dochodzą do wyniku końcowego. 
+       Algorytmy bardziej skomplikowane posiadają mniejszą złożoność obliczeniową - szybko dochodzą do rozwiązania.
+        Złożoność obliczeniowa wszystkich algorytmów sortujących została dokładnie oszacowana
+    </article>
+
+  </div>
+
+  <div id="divOpis">
+    <h3>Sortowanie bombelkowe</h3>
+    <article id="opis">
+
+      Algorytm sortowania bąbelkowego jest jednym z najstarszych algorytmów sortujących. Zasada działania opiera się na cyklicznym porównywaniu par sąsiadujących elementów i zamianie ich kolejności w przypadku niespełnienia kryterium porządkowego zbioru. Operację tę wykonujemy dotąd, aż cały zbiór zostanie posortowany.
+
+Algorytm sortowania bąbelkowego przy porządkowaniu zbioru nieposortowanego ma klasę czasowej złożoności obliczeniowej równą &#x039F (n<sup>2</sup>). Sortowanie odbywa się w miejscu, 
+czyli wymagają stałej liczby dodatkowych struktur danych, która nie zależy od liczby elementów sortowanego zbioru danych (ani od ich wartości). Dodatkowa złożoność pamięciowa jest zatem klasy &#x039F (1). Sortowanie odbywa się wewnątrz zbioru.
+
+    </article>
+
+    <canvas id="bubbleSortCanvas" width="600" height="400"></canvas>
+    
+    <div id="controls">
+      <button onclick="getAlgorithm(1)" class="algo">Pokaż pseudokod</button>
+      <button onclick="startAnimationBubble()">Sortuj</button>
+      <button onclick="generateNewNumbers(1)">Resetuj</button>
+      <label for="speedInput">Szybkość: </label>
+      <input type="range" id="speedInputBubble" min="1" max="100" value="50" oninput="updateSpeed(1)">
+      <span id="speedValueBubble">50</span>
+      <button onclick="saveParams(1)">Zapisz parametry</button><span id="save1"></span>
+      <p id="timerBubble">Czas: 0 sekund</p>
+    </div>
+
+    <div id="kod1" class="kod">
+      
+    </div>
+
+  </div>
+  
+  <div id="divOpis">
+
+    <h3>Sortowanie przez wstawianie</h3>
+
+    <article id="opis">
+
+      Algorytm sortowania przez wstawianie można porównać do sposobu układania kart pobieranych z talii. Najpierw bierzemy pierwszą kartę. Następnie pobieramy kolejne, aż do wyczerpania talii. Każdą pobraną kartę porównujemy z kartami, które już trzymamy w ręce i szukamy dla niej miejsca przed pierwszą kartą starszą (młodszą w przypadku porządku malejącego). Gdy znajdziemy takie miejsce, rozsuwamy karty i nową wstawiamy na przygotowane w ten sposób miejsce (stąd pochodzi nazwa algorytmu - sortowanie przez wstawianie, ang. Insertion Sort). Jeśli nasza karta jest najstarsza (najmłodsza), to umieszczamy ją na samym końcu. Tak porządkujemy karty. A jak przenieść tę ideę do świata komputerów i zbiorów liczbowych?<br><br>
+
+Algorytm sortowania przez wstawianie będzie składał się z dwóch pętli. Pętla główna (zewnętrzna) symuluje pobieranie kart, czyli w tym wypadku elementów zbioru. Odpowiednikiem kart na ręce jest tzw. lista uporządkowana (ang. sorted list), którą sukcesywnie będziemy tworzyli na końcu zbioru (istnieje też odmiana algorytmu umieszczająca listę uporządkowaną na początku zbioru). Pętla sortująca (wewnętrzna) szuka dla pobranego elementu miejsca na liście uporządkowanej. Jeśli takie miejsce zostanie znalezione, to elementy listy są odpowiednio rozsuwane, aby tworzyć miejsce na nowy element i element wybrany przez pętlę główną trafia tam. W ten sposób lista uporządkowana rozrasta się. Jeśli na liście uporządkowanej nie ma elementu większego od wybranego, to element ten trafia na koniec listy. Sortowanie zakończymy, gdy pętla główna wybierze wszystkie elementy zbioru.<br><br>
+
+Algorytm sortowania przez wstawianie posiada klasę czasowej złożoności obliczeniowej równą &#x039F (n<sup>2</sup>). Sortowanie odbywa się w miejscu.
+
+    </article>
+
+    <canvas id="insertionSortCanvas" width="600" height="400"></canvas>
+    
+    <div id="controls">
+      <button onclick="getAlgorithm(2)" class="algo">Pokaż pseudokod</button>
+      <button onclick="startAnimationInsert()">Sortuj</button>
+      <button onclick="generateNewNumbers(2)">Resetuj</button>
+      <label for="speedInput">Szybkość: </label>
+      <input type="range" id="speedInputInsert" min="1" max="100" value="50" oninput="updateSpeed(2)">
+      <span id="speedValueInsert">50</span>
+      <button onclick="saveParams(2)">Zapisz parametry</button><span id="save2"></span>
+      <p id="timerInsert">Czas: 0 sekund</p>
+
+    </div>
+
+    <div id="kod2" class="kod">
+      
+    </div>
+
+</div>
+
+<div id="divOpis">
+
+  <h3>Sortowanie przez wybór</h3>
+
+  <article id="opis">
+
+    Idea algorytmu sortowania przez wybór jest bardzo prosta. Załóżmy, iż chcemy posortować zbiór liczbowy rosnąco. Zatem element najmniejszy powinien znaleźć się na pierwszej pozycji. Szukamy w zbiorze elementu najmniejszego i wymieniamy go z elementem na pierwszej pozycji. W ten sposób element najmniejszy znajdzie się na swojej docelowej pozycji.<br><br>
+
+W identyczny sposób postępujemy z resztą elementów należących do zbioru. Znów wyszukujemy element najmniejszy i zamieniamy go z elementem na drugiej pozycji. Otrzymamy dwa posortowane elementy. Procedurę kontynuujemy dla pozostałych elementów dotąd, aż wszystkie będą posortowane.<br><br>
+
+Algorytm sortowania przez wybór posiada klasę czasowej złożoności obliczeniowej równą O(n2). Sortowanie odbywa się w miejscu.
+    
+  </article>
+
+  <canvas id="selectionSortCanvas" width="600" height="400"></canvas>
+  
+  <div id="controls">
+    <button onclick="getAlgorithm(3)" class="algo">Pokaż pseudokod</button>
+    <button onclick="startAnimationSelection()">Sortuj</button>
+    <button onclick="generateNewNumbers(3)">Resetuj</button>
+    <label for="speedInput">Szybkość: </label>
+    <input type="range" id="speedInputSelect" min="1" max="100" value="50" oninput="updateSpeed(3)">
+    <span id="speedValueSelect">50</span>
+    <button onclick="saveParams(3)">Zapisz parametry</button><span id="save3"></span>
+    <p id="timerSelection">Czas: 0 sekund</p>
+  </div>
+
+  <div id="kod3" class="kod">
+      
+  </div>
+
+  </div>
+
+  <div id="divOpis">
+
+    <h3>Sortowanie przez scalanie</h3>
+
+    <article id="opis">
+
+      Poczynając od tego rozdziału przechodzimy do opisu algorytmów szybkich, tzn. takich, które posiadają klasę czasowej złożoności obliczeniowej równą O(n·log n) lub nawet lepszą.<br><br>
+
+W informatyce zwykle obowiązuje zasada, iż prosty algorytm posiada dużą złożoność obliczeniową, natomiast algorytm zaawansowany posiada małą złożoność obliczeniową, ponieważ wykorzystuje on pewne własności, dzięki którym szybciej dochodzi do rozwiązania.<br><br>
+
+Wiele dobrych algorytmów sortujących korzysta z rekurencji, która powstaje wtedy, gdy do rozwiązania problemu algorytm wykorzystuje samego siebie ze zmienionym zestawem danych.
+<h3>Algorytm scalania zbiorów uporządkowanych</h3>
+      Podstawową operacją algorytmu jest scalanie dwóch zbiorów uporządkowanych w jeden zbiór również uporządkowany. Operację scalania realizujemy wykorzystując pomocniczy zbiór, w którym będziemy tymczasowo odkładać scalane elementy dwóch zbiorów. Ogólna zasada jest następująca:
+      <div id="przyklady">
+        <ul>
+          <li>Przygotuj pusty zbiór tymczasowy</li>
+          <li>Dopóki żaden ze scalanych zbiorów nie jest pusty, porównuj ze sobą pierwsze elementy każdego z nich i w zbiorze tymczasowym umieszczaj mniejszy z elementów usuwając go jednocześnie ze scalanego zbioru.</li>
+          <li>W zbiorze tymczasowym umieść zawartość tego scalanego zbioru, który zawiera jeszcze elementy.</li>
+          <li>Zawartość zbioru tymczasowego przepisz do zbioru wynikowego i zakończ algorytm.</li>
+        </ul>
+
+      </div>
+      <h3>Algorytm scalania dwóch zbiorów</h3>
+      Przed przystąpieniem do wyjaśniania sposobu łączenia dwóch zbiorów uporządkowanych w jeden zbiór również uporządkowany musimy zastanowić się nad sposobem reprezentacji danych. Przyjmijmy, iż elementy zbioru będą przechowywane w jednej tablicy, którą oznaczymy literką d. Każdy element w tej tablicy będzie posiadał swój numer, czyli indeks z zakresu od 1 do n.<br><br>
+
+Kolejnym zagadnieniem jest sposób reprezentacji scalanych zbiorów. W przypadku algorytmu sortowania przez scalanie zawsze będą to dwie przyległe połówki zbioru, który został przez ten algorytm podzielony. Co więcej, wynik scalenia ma być umieszczony z powrotem w tym samym zbiorze.
+      
+    </article>
+
+  <canvas id="mergeSortCanvas" width="600" height="400"></canvas>
+  
+  <div id="controls">
+    <button onclick="getAlgorithm(4)" class="algo">Pokaż pseudokod</button>
+    <button onclick="startAnimationMerge()">Sortuj</button>
+    <button onclick="generateNewNumbers(4)">Resetuj</button>
+    <label for="speedInput">Szybkość: </label>
+    <input type="range" id="speedInputMerge" min="1" max="100" value="50" oninput="updateSpeed(4)">
+    <span id="speedValueMerge">50</span>
+    <button onclick="saveParams(4)">Zapisz parametry</button><span id="save4"></span>
+    <p id="timerMerge">Czas: 0 sekund</p>
+  </div>
+
+  <div id="kod4" class="kod">
+      
+  </div>
+
+  </div>
+
+  <div id="divOpis">
+
+    <h3>Szybkie sortowanie</h3>
+
+    <article id="opis">
+
+      Sortowanie szybkie zostało wynalezione przez angielskiego informatyka, profesora Tony'ego Hoare'a w latach 60-tych ubiegłego wieku. W przypadku typowym algorytm ten jest najszybszym algorytmem sortującym z klasy złożoności obliczeniowej O(n log n) - stąd pochodzi jego popularność w zastosowaniach. <br><br>
+      Musimy jednak pamiętać, iż w pewnych sytuacjach (zależnych od sposobu wyboru piwotu oraz niekorzystnego ułożenia danych wejściowych) klasa złożoności obliczeniowej tego algorytmu może się degradować do O(n2), co więcej, poziom wywołań rekurencyjnych może spowodować przepełnienie stosu i zablokowanie komputera. Z tych powodów algorytmu sortowania szybkiego nie można stosować bezmyślnie w każdej sytuacji tylko dlatego, iż jest uważany za jeden z najszybszych algorytmów sortujących - zawsze należy przeprowadzić analizę możliwych danych wejściowych właśnie pod kątem przypadku niekorzystnego - czasem lepszym rozwiązaniem może być zastosowanie innego algorytmu sortującego <br><br>
+      <h3>Wyznaczenie piwotu i zbiorów</h3>
+      Do utworzenia partycji musimy ze zbioru wybrać jeden z elementów, który nazwiemy piwotem. W lewej partycji znajdą się wszystkie elementy niewiększe od piwotu, a w prawej partycji umieścimy wszystkie elementy niemniejsze od piwotu. Położenie elementów równych nie wpływa na proces sortowania, zatem mogą one występować w obu partycjach. Również porządek elementów w każdej z partycji nie jest ustalony.Jako piwot można wybierać element pierwszy, środkowy, ostatni, medianę lub losowy.<br><br>
+      Dzielenie na partycje polega na umieszczeniu dwóch wskaźników na początku zbioru - i oraz j. Wskaźnik i przebiega przez zbiór poszukując wartości mniejszych od piwotu. Po znalezieniu takiej wartości jest ona wymieniana z elementem na pozycji j. Po tej operacji wskaźnik j jest przesuwany na następną pozycję. Wskaźnik j zapamiętuje pozycję, na którą trafi następny element oraz na końcu wskazuje miejsce, gdzie znajdzie się piwot. W trakcie podziału piwot jest bezpiecznie przechowywany na ostatniej pozycji w zbiorze.
+      
+    </article>
+
+  <canvas id="quickSortCanvas" width="600" height="400"></canvas>
+  
+  <div id="controls">
+    <button onclick="getAlgorithm(5)" class="algo">Pokaż pseudokod</button>
+    <button onclick="startAnimationQuick()">Sortuj</button>
+    <button onclick="generateNewNumbers(5)">Resetuj</button>
+    <label for="speedInput">Szybkość: </label>
+    <input type="range" id="speedInputQuick" min="1" max="100" value="50" oninput="updateSpeed(5)">
+    <span id="speedValueQuick">50</span>
+    <button onclick="saveParams(5)">Zapisz parametry</button><span id="save5"></span>
+    <p id="timerQuick">Czas: 0 sekund</p>
+  </div>
+
+  <div id="kod5" class="kod">
+      
+  </div>
+
+  </div>
+
+  <div id="divOpis">
+
+    <h3>Sortowanie przez kopcowanie</h3>
+
+    <article id="opis">
+      <h3>Tworzenie kopca</h3>
+      Kopiec jest drzewem binarnym, w którym wszystkie węzły spełniają następujący warunek (zwany warunkiem kopca):
+<ul>
+<li>Węzeł nadrzędny jest większy lub równy węzłom potomnym (w porządku malejącym relacja jest odwrotna - mniejszy lub równy).</li>
+</ul>
+Konstrukcja kopca jest nieco bardziej skomplikowana od konstrukcji drzewa binarnego, ponieważ musimy dodatkowo troszczyć się o zachowanie warunku kopca. Zatem po każdym dołączeniu do kopca nowego węzła, sprawdzamy odpowiednie warunki i ewentualnie dokonujemy wymian węzłów na ścieżce wiodącej od dodanego węzła do korzenia.
+<h3>Rozbiór kopca</h3>
+Zasada rozbiorku kopca jest prosta i następująca:
+<ol>
+  <li>Zamień miejscami korzeń z ostatnim liściem, który wyłącz ze struktury kopca. Elementem pobieranym z kopca jest zawsze jego korzeń, czyli element największy.</li>
+  <li>Jeśli jest to konieczne, przywróć warunek kopca idąc od korzenia w dół.</li>
+  <li>Kontynuuj od kroku 1, aż kopiec będzie pusty.</li>
+</ol>
+<h3>Sortowanie</h3>
+Teraz sam algorytm sortowania jest prosty - polega na stworzeniu kopca a następnie jego rozbiorze. W ten sposób nasz zbiór liczb zostanie posortowany. Złożoność czasowa algorytmu wynosi O (n log n) we wszystkich przypadkach. Przez co może to być czasem lepszy wybór niż stosowanie szybkiego sortowania w którym pesymistyczna złożoność czasowa może wynosić O(n<sup>2</sup>). 
+
+      
+    </article>
+
+  <canvas id="heapSortCanvas" width="600" height="400"></canvas>
+  
+  <div id="controls">
+    <button onclick="getAlgorithm(6)" class="algo">Pokaż pseudokod</button>
+    <button onclick="startAnimationHeap()">Sortuj</button>
+    <button onclick="generateNewNumbers(6)">Resetuj</button>
+    <label for="speedInput">Szybkość: </label>
+    <input type="range" id="speedInputHeap" min="1" max="100" value="50" oninput="updateSpeed(6)">
+    <span id="speedValueHeap">50</span>
+    <button onclick="saveParams(6)">Zapisz parametry</button><span id="save6"></span>
+    <p id="timerHeap">Czas: 0 sekund</p>
+  </div>
+
+  <div id="kod6" class="kod">
+      
+  </div>
+
+  </div>
+
+  <div id="divOpis">
+    <h3>Podsumowanie</h3>
+    <div id="opis">
+      Bazując na powyższych przykładach algorytmów sortujących możemy stworzyć tabelkę podsumowującą zebrana wiedzę do tej pory<br><br>
+
+      Jak widzimy jedne algorytmy są warte uwagi i stosowania ich, jedne nie. Niektóre czasem jest lepiej użyć ze względu na swoją złożoność czasową a niektóre są dość uniwersalne takie jak sortowanie przez scalanie czy kopcowanie. Należy również wziąc pod uwage to czy algorytm wykonuje sortowanie w miejscu. Jeśli nie, trzeba pamiętać o zarezerwowaniu dodatkowej pamięci podczas sortowania.
+    </div>
+
+    <table class="tg" border>
+    <thead>
+      <tr>
+        <th class="tg-0pky" rowspan="2">Lp.</th>
+        <th class="tg-0pky" rowspan="2">Nazwa algorytmu</th>
+        <th class="tg-0pky" colspan="3">Klasa złożoności</th>
+        <th class="tg-0lax" rowspan="2">Stabilność</th>
+        <th class="tg-0lax" rowspan="2">Sortownie w miejscu</th>
+      </tr>
+      <tr>
+        <th class="tg-0pky">optymistyczna</th>
+        <th class="tg-0pky">średnia</th>
+        <th class="tg-0pky">pesymistyczna</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="tg-0lax">1.</td>
+        <td class="tg-0pky">Sortowanie bombelkowe</td>
+        <td class="tg-0pky">O(n<sup>2</sup>)</td>
+        <td class="tg-0pky">O(n<sup>2</sup>)</td>
+        <td class="tg-0pky">O(n<sup>2</sup>)</td>
+        <td class="tg-0pky">Tak</td>
+        <td class="tg-0lax">Tak</td>
+      </tr>
+      <tr>
+        <td class="tg-0pky">2.</td>
+        <td class="tg-0pky">Sortowanie przez wstawianie</td>
+        <td class="tg-0pky">O(n)</td>
+        <td class="tg-0pky">O(n<sup>2</sup>)</td>
+        <td class="tg-0pky">O(n<sup>2</sup>)</td>
+        <td class="tg-0lax">Tak</td>
+        <td class="tg-0lax">Tak</td>
+      </tr>
+      <tr>
+        <td class="tg-0lax">3.</td>
+        <td class="tg-0lax">Sortowanie przez wybór</td>
+        <td class="tg-0lax">O(n<sup>2</sup>)</td>
+        <td class="tg-0lax">O(n<sup>2</sup>)</td>
+        <td class="tg-0lax">O(n<sup>2</sup>)</td>
+        <td class="tg-0lax">Nie</td>
+        <td class="tg-0lax">Tak</td>
+      </tr>
+      <tr>
+        <td class="tg-0lax">4.</td>
+        <td class="tg-0lax">Sortowanie przez scalanie</td>
+        <td class="tg-0lax">O(n log n)</td>
+        <td class="tg-0lax">O(n log n)</td>
+        <td class="tg-0lax">O(n log n)</td>
+        <td class="tg-0lax">Tak</td>
+        <td class="tg-0lax">Nie</td>
+      </tr>
+      <tr>
+        <td class="tg-0lax">5.</td>
+        <td class="tg-0lax">Szybkie sortowanie</td>
+        <td class="tg-0lax">O(n log n)</td>
+        <td class="tg-0lax">O(n log n)</td>
+        <td class="tg-0lax">O(n<sup>2</sup>)</td>
+        <td class="tg-0lax">Nie</td>
+        <td class="tg-0lax">Tak</td>
+      </tr>
+      <tr>
+        <td class="tg-0lax">6.</td>
+        <td class="tg-0lax">Sortowanie przez kopcowanie</td>
+        <td class="tg-0lax">O(n log n)</td>
+        <td class="tg-0lax">O(n log n)</td>
+        <td class="tg-0lax">O(n log n)</td>
+        <td class="tg-0lax">Nie</td>
+        <td class="tg-0lax">Tak</td>
+      </tr>
+    </tbody>
+    </table>
+  </div>
+  </main>
+
+    <footer>
+
+      <span>Adam Niewczas - projekt serwisu edukacyjnego na przedmiot Techniki internetowe. WFIIS 2023/2024</span>
+
+    </footer>
+</body>
+</html>

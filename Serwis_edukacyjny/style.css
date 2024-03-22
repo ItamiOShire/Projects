@@ -1,0 +1,167 @@
+
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;
+}
+
+header {
+    background-color: bisque;
+    padding: 5px;
+}
+
+footer {
+    background-color: bisque;
+    padding: 5px;
+}
+
+canvas {
+  border: 1px solid #000;
+  display: block;
+  margin: 20px auto;
+}
+
+#controls {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#opis {
+    background-color: aqua;
+    width:50%;
+    padding: 5px;
+    border-left: solid 5px blue;
+    float:left;
+}
+
+#divOpis{
+  background-color: lightblue;
+  border:solid 1px black;
+  margin:10px;
+  padding:10px;
+  border-radius: 5px;
+}
+
+#divOpis:after{
+  content:'';
+        display:block;
+        clear:both;
+}
+#kod6:after
+{
+  content:'';
+        display:block;
+        clear:both;
+}
+.kod {
+  padding-top:10%;
+}
+
+#im1{
+  width:50%;
+  float:left;
+  text-align: center;
+  padding:5px;
+}
+
+h3 {
+  background-color: lightcyan;
+  text-align: center;
+  border:solid 1px black;
+  border-radius: 5px;
+}
+
+#gif1 {
+    float: left;
+    text-align: center;
+    padding: auto;
+    width: 50%;
+}
+
+#przyklady {
+  background-color: rgb(0, 200, 255);
+}
+
+tr {
+  text-align: center;
+}
+
+#Fib {
+    width:500px;
+    height:46px;
+    font-size:24px;
+    margin:0 auto;
+    text-align:center;
+  }
+  
+  #Fib > span {
+    display:block;
+    float:left;
+    width:40px;
+    line-height:40px;
+    margin:0 5px;
+    border:3px solid #FDD700;
+    background-color:#FFF;
+    border-radius:6px;
+    animation:animowany_tekst 5s linear infinite;
+  }
+  #Fib > #F {
+    animation-delay:250ms;
+  }
+  
+  #Fib > #I {
+    animation-delay:500ms;
+  }
+  
+  #Fib > #B {
+    animation-delay:750ms;
+  }
+  
+  #Fib > #O {
+    animation-delay:1000ms;
+  }
+  
+  #Fib > #N {
+    animation-delay:1250ms;
+  }
+  
+  #Fib > #A {
+    animation-delay:1500ms;
+  }
+  
+  #Fib > #C {
+    animation-delay:1750ms;
+  }
+  
+  #Fib > #C2 {
+    animation-delay:2000ms;
+  }
+  #Fib > #I2 {
+    animation-delay:2250ms;
+  }
+  #Fib > #I3 {
+    animation-delay:2500ms;
+  }
+  @keyframes animowany_tekst
+      {
+        0% {transform:rotate(0);}
+        10% {transform:rotate(360deg);}
+        100% {transform:rotate(360deg);}
+      }
+
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
