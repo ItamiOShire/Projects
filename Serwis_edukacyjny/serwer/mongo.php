@@ -3,10 +3,10 @@
 //require '../vendor/autoload.php' ;
   
 class db {
-    private $user = "1niewczas" ;
-    private $pass = "pass1niewczas";
-    private $host = "172.20.44.25";
-    private $base = "1niewczas";
+    private $user = "****" ;
+    private $pass = "****";
+    private $host = "****";
+    private $base = "****";
     private $coll = "users";
     private $conn;
     private $dbase;
